@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hamyounghoon.back.mapper.mhha.roles.RolesMapper">
+    <select id="findAllSystemList" resultType="hamyounghoon.back.model.mhha.roles.SystemListModel">
+        SELECT      *
+        FROM        mhha.dbo.t_mhha_system_list
+        ORDER BY    seq ASC
+    </select>
+    <select id="findAllSystemDeptList" resultType="hamyounghoon.back.model.mhha.roles.SystemDeptListModel">
+        SELECT      *
+        FROM        mhha.dbo.t_mhha_system_dept_list
+        ORDER BY    seq ASC
+    </select>
+    <select id="findSystemDeptBySystemSeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.roles.SystemDeptListModel">
+        SELECT      *
+        FROM        mhha.dbo.t_mhha_system_dept_list
+        WHERE       system_seq = ${system_seq}
+        ORDER BY    seq ASC
+    </select>
+    <select id="findAllSystemRolesList" resultType="hamyounghoon.back.model.mhha.roles.SystemRolesListModel">
+        SELECT      *
+        FROM        mhha.dbo.t_mhha_system_roles_list
+        ORDER BY    seq ASC
+    </select>
+    <select id="findSystemRolesBySystemSeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.roles.SystemRolesListModel">
+        SELECT      *
+        FROM        mhha.dbo.t_mhha_system_roles_list
+        WHERE       system_seq = ${system_seq}
+        ORDER BY    seq ASC
+    </select>
+
+    <select id="findAllPersonDept" resultType="hamyounghoon.back.model.mhha.roles.PersonDeptModel">
+        SELECT      *
+        FROM        mhha.dbo.t_mhha_person_dept
+        ORDER BY    seq ASC
+    </select>
+    <select id="findPersonDeptBySystemSeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.roles.PersonDeptModel">
+        SELECT      tdept.seq, tdeptjoin.system_dept_seq, tdept.person_seq
+        FROM        mhha.dbo.t_mhha_person_dept tdept
+        LEFT JOIN (
+                    SELECT      tsystem.seq AS system_seq, tsystem.name AS system_name, tsystemdept.seq AS system_dept_seq, tsystemdept.name AS dept_name
+                    FROM        mhha.dbo.t_mhha_system_dept_list tsystemdept
+                    LEFT JOIN   mhha.dbo.t_mhha_system_list tsystem ON tsystemdept.system_seq = tsystem.seq
+        ) tdeptjoin ON tdept.system_dept_seq = tdeptjoin.system_dept_seq
+        WHERE       tdeptjoin.system_seq = ${system_seq}
+        ORDER BY    seq ASC
+    </select>
+    <select id="findPersonDeptByPersonSeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.roles.PersonDeptModel">
+        SELECT      tdept.seq, tdeptjoin.system_dept_seq, tdept.person_seq
+        FROM        mhha.dbo.t_mhha_person_dept tdept
+        LEFT JOIN (
+                    SELECT      tsystem.seq AS system_seq, tsystem.name AS system_name, tsystemdept.seq AS system_dept_seq, tsystemdept.name AS dept_name
+                    FROM        mhha.dbo.t_mhha_system_dept_list tsystemdept
+                    LEFT JOIN   mhha.dbo.t_mhha_system_list tsystem ON tsystemdept.system_seq = tsystem.seq
+        ) tdeptjoin ON tdept.system_dept_seq = tdeptjoin.system_dept_seq
+        WHERE       tdept.person_seq = ${person_seq}
+        ORDER BY    seq ASC
+    </select>
+    <select id="findPersonDeptBySystemSeqAndPersonSeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.roles.PersonDeptModel">
+        SELECT      tdept.seq, tdeptjoin.system_dept_seq, tdept.person_seq
+        FROM        mhha.dbo.t_mhha_person_dept tdept
+        LEFT JOIN (
+                    SELECT      tsystem.seq AS system_seq, tsystem.name AS system_name, tsystemdept.seq AS system_dept_seq, tsystemdept.name AS dept_name
+                    FROM        mhha.dbo.t_mhha_system_dept_list tsystemdept
+                    LEFT JOIN   mhha.dbo.t_mhha_system_list tsystem ON tsystemdept.system_seq = tsystem.seq
+        ) tdeptjoin ON tdept.system_dept_seq = tdeptjoin.system_dept_seq
+        WHERE       tdeptjoin.system_seq = ${system_seq} AND tdept.person_seq = ${person_seq}
+        ORDER BY    seq ASC
+    </select>
+    <select id="findPersonDeptStringByPersonSeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.roles.PersonDeptModel">
+        SELECT      tdept.seq, tdeptjoin.system_dept_seq, tdept.person_seq
+        FROM        mhha.dbo.t_mhha_person_dept tdept
+        LEFT JOIN (
+                    SELECT      tsystem.seq AS system_seq, tsystem.name AS system_name, tsystemdept.seq AS system_dept_seq, tsystemdept.name AS dept_name
+                    FROM        mhha.dbo.t_mhha_system_dept_list tsystemdept
+                    LEFT JOIN   mhha.dbo.t_mhha_system_list tsystem ON tsystemdept.system_seq = tsystem.seq
+        ) tdeptjoin ON tdept.system_dept_seq = tdeptjoin.system_dept_seq
+        WHERE       tdept.person_seq = ${person_seq}
+        ORDER BY    seq ASC
+    </select>
+    <select id="findPersonDeptStringBySystemSeqAndPersonSeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.roles.PersonDeptModel">
+        SELECT      tdept.seq, tdeptjoin.system_dept_seq, tdept.person_seq
+        FROM        mhha.dbo.t_mhha_person_dept tdept
+        LEFT JOIN (
+                    SELECT      tsystem.seq AS system_seq, tsystem.name AS system_name, tsystemdept.seq AS system_dept_seq, tsystemdept.name AS dept_name
+                    FROM        mhha.dbo.t_mhha_system_dept_list tsystemdept
+                    LEFT JOIN   mhha.dbo.t_mhha_system_list tsystem ON tsystemdept.system_seq = tsystem.seq
+        ) tdeptjoin ON tdept.system_dept_seq = tdeptjoin.system_dept_seq
+        WHERE       tdeptjoin.system_seq = ${system_seq} AND tdept.person_seq = ${person_seq}
+        ORDER BY    seq ASC
+    </select>
+
+    <select id="findAllPersonRoles" resultType="hamyounghoon.back.model.mhha.roles.PersonRolesModel">
+        SELECT      *
+        FROM        mhha.dbo.t_mhha_person_roles
+        ORDER BY    seq ASC
+    </select>
+    <select id="findPersonRolesBySystemSeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.roles.PersonRolesModel">
+        SELECT      troles.seq, trolesjoin.system_roles_seq, troles.person_seq
+        FROM        mhha.dbo.t_mhha_person_roles troles
+        LEFT JOIN (
+                    SELECT      tsystem.seq AS system_seq, tsystem.name AS system_name, tsystemroles.seq AS system_roles_seq, tsystemroles.name AS roles_name
+                    FROM        mhha.dbo.t_mhha_system_roles_list tsystemroles
+                    LEFT JOIN   mhha.dbo.t_mhha_system_list tsystem ON tsystemroles.system_seq = tsystem.seq
+        ) trolesjoin ON troles.system_roles_seq = trolesjoin.system_roles_seq
+        WHERE       trolesjoin.system_seq = ${system_seq}
+        ORDER BY    seq ASC
+    </select>
+    <select id="findPersonRolesByPersonSeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.roles.PersonRolesModel">
+        SELECT      troles.seq, trolesjoin.system_roles_seq, troles.person_seq
+        FROM        mhha.dbo.t_mhha_person_roles troles
+        LEFT JOIN (
+                    SELECT      tsystem.seq AS system_seq, tsystem.name AS system_name, tsystemroles.seq AS system_roles_seq, tsystemroles.name AS roles_name
+                    FROM        mhha.dbo.t_mhha_system_roles_list tsystemroles
+                    LEFT JOIN   mhha.dbo.t_mhha_system_list tsystem ON tsystemroles.system_seq = tsystem.seq
+        ) trolesjoin ON troles.system_roles_seq = trolesjoin.system_roles_seq
+        WHERE       troles.person_seq = ${person_seq}
+        ORDER BY    seq ASC
+    </select>
+    <select id="findPersonRolesBySystemSeqAndPersonSeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.roles.PersonRolesModel">
+        SELECT      troles.seq, trolesjoin.system_roles_seq, troles.person_seq
+        FROM        mhha.dbo.t_mhha_person_roles troles
+        LEFT JOIN (
+                    SELECT      tsystem.seq AS system_seq, tsystem.name AS system_name, tsystemroles.seq AS system_roles_seq, tsystemroles.name AS roles_name
+                    FROM        mhha.dbo.t_mhha_system_roles_list tsystemroles
+                    LEFT JOIN   mhha.dbo.t_mhha_system_list tsystem ON tsystemroles.system_seq = tsystem.seq
+        ) trolesjoin ON troles.system_roles_seq = trolesjoin.system_roles_seq
+        WHERE       trolesjoin.system_seq = ${system_seq} AND troles.person_seq = ${person_seq}
+        ORDER BY    seq ASC
+    </select>
+    <select id="findPersonRolesStringByPersonSeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.roles.PersonRolesModel">
+        SELECT      troles.seq, trolesjoin.system_roles_seq, troles.person_seq
+        FROM        mhha.dbo.t_mhha_person_roles troles
+        LEFT JOIN (
+                    SELECT      tsystem.seq AS system_seq, tsystem.name AS system_name, tsystemroles.seq AS system_roles_seq, tsystemroles.name AS roles_name
+                    FROM        mhha.dbo.t_mhha_system_roles_list tsystemroles
+                    LEFT JOIN   mhha.dbo.t_mhha_system_list tsystem ON tsystemroles.system_seq = tsystem.seq
+        ) trolesjoin ON troles.system_roles_seq = trolesjoin.system_roles_seq
+        WHERE AND   troles.person_seq = ${person_seq}
+        ORDER BY    seq ASC
+    </select>
+    <select id="findPersonRolesStringBySystemSeqAndPersonSeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.roles.PersonRolesModel">
+        SELECT      troles.seq, trolesjoin.system_roles_seq, troles.person_seq
+        FROM        mhha.dbo.t_mhha_person_roles troles
+        LEFT JOIN (
+                    SELECT      tsystem.seq AS system_seq, tsystem.name AS system_name, tsystemroles.seq AS system_roles_seq, tsystemroles.name AS roles_name
+                    FROM        mhha.dbo.t_mhha_system_roles_list tsystemroles
+                    LEFT JOIN   mhha.dbo.t_mhha_system_list tsystem ON tsystemroles.system_seq = tsystem.seq
+        ) trolesjoin ON troles.system_roles_seq = trolesjoin.system_roles_seq
+        WHERE       trolesjoin.system_seq = ${system_seq} AND troles.person_seq = ${person_seq}
+        ORDER BY    seq ASC
+    </select>
+
+    <select id="findPersonRolesCompFromDept" resultType="hamyounghoon.back.model.mhha.person.PersonRolesCompModel">
+        SELECT      tdept.person_seq, tdeptjoin.system_seq, tdeptjoin.system_name, tdeptjoin.system_dept_seq AS seq, tdeptjoin.dept_name AS name
+        FROM        mhha.dbo.t_mhha_person_dept tdept
+        LEFT JOIN (
+                    SELECT      tsystem.seq AS system_seq, tsystem.name AS system_name, tsystemdept.seq AS system_dept_seq, tsystemdept.name AS dept_name
+                    FROM        mhha.dbo.t_mhha_system_dept_list tsystemdept
+                    LEFT JOIN   mhha.dbo.t_mhha_system_list tsystem ON tsystemdept.system_seq = tsystem.seq
+        ) tdeptjoin ON tdept.system_dept_seq = tdeptjoin.system_dept_seq
+        ORDER BY    seq ASC
+    </select>
+    <select id="findPersonRolesCompFromDeptByPersonSeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.person.PersonRolesCompModel">
+        SELECT      tdept.person_seq, tdeptjoin.system_seq, tdeptjoin.system_name, tdeptjoin.system_dept_seq AS seq, tdeptjoin.dept_name AS name
+        FROM        mhha.dbo.t_mhha_person_dept tdept
+        LEFT JOIN (
+                    SELECT      tsystem.seq AS system_seq, tsystem.name AS system_name, tsystemdept.seq AS system_dept_seq, tsystemdept.name AS dept_name
+                    FROM        mhha.dbo.t_mhha_system_dept_list tsystemdept
+                    LEFT JOIN   mhha.dbo.t_mhha_system_list tsystem ON tsystemdept.system_seq = tsystem.seq
+        ) tdeptjoin ON tdept.system_dept_seq = tdeptjoin.system_dept_seq
+        WHERE       tdept.person_seq = ${person_seq}
+        ORDER BY    seq ASC
+    </select>
+    <select id="findPersonRolesCompFromDeptBySystemSeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.person.PersonRolesCompModel">
+        SELECT      tdept.person_seq, tdeptjoin.system_seq, tdeptjoin.system_name, tdeptjoin.system_dept_seq AS seq, tdeptjoin.dept_name AS name
+        FROM        mhha.dbo.t_mhha_person_dept tdept
+        LEFT JOIN (
+                    SELECT      tsystem.seq AS system_seq, tsystem.name AS system_name, tsystemdept.seq AS system_dept_seq, tsystemdept.name AS dept_name
+                    FROM        mhha.dbo.t_mhha_system_dept_list tsystemdept
+                    LEFT JOIN   mhha.dbo.t_mhha_system_list tsystem ON tsystemdept.system_seq = tsystem.seq
+        ) tdeptjoin ON tdept.system_dept_seq = tdeptjoin.system_dept_seq
+        WHERE       tdept.system_seq = ${system_seq}
+        ORDER BY    seq ASC
+    </select>
+    <select id="findPersonRolesCompFromDeptBySystemSeqAndPersonSeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.person.PersonRolesCompModel">
+        SELECT      tdept.person_seq, tdeptjoin.system_seq, tdeptjoin.system_name, tdeptjoin.system_dept_seq AS seq, tdeptjoin.dept_name AS name
+        FROM        mhha.dbo.t_mhha_person_dept tdept
+        LEFT JOIN (
+                    SELECT      tsystem.seq AS system_seq, tsystem.name AS system_name, tsystemdept.seq AS system_dept_seq, tsystemdept.name AS dept_name
+                    FROM        mhha.dbo.t_mhha_system_dept_list tsystemdept
+                    LEFT JOIN   mhha.dbo.t_mhha_system_list tsystem ON tsystemdept.system_seq = tsystem.seq
+        ) tdeptjoin ON tdept.system_dept_seq = tdeptjoin.system_dept_seq
+        WHERE       tdeptjoin.system_seq = ${system_seq} AND tdept.person_seq = ${person_seq}
+        ORDER BY    seq ASC
+    </select>
+
+    <select id="findPersonRolesCompFromRoles" resultType="hamyounghoon.back.model.mhha.person.PersonRolesCompModel">
+        SELECT      troles.person_seq, trolesjoin.system_seq, trolesjoin.system_name, trolesjoin.system_roles_seq AS seq, trolesjoin.roles_name AS name
+        FROM        mhha.dbo.t_mhha_person_roles troles
+        LEFT JOIN (
+                    SELECT      tsystem.seq AS system_seq, tsystem.name AS system_name, tsystemroles.seq AS system_roles_seq, tsystemroles.name AS roles_name
+                    FROM        mhha.dbo.t_mhha_system_roles_list tsystemroles
+                    LEFT JOIN   mhha.dbo.t_mhha_system_list tsystem ON tsystemroles.system_seq = tsystem.seq
+        ) trolesjoin ON troles.system_roles_seq = trolesjoin.system_roles_seq
+        ORDER BY    seq ASC
+    </select>
+    <select id="findPersonRolesCompFromRolesByPersonSeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.person.PersonRolesCompModel">
+        SELECT      troles.person_seq, trolesjoin.system_seq, trolesjoin.system_name, trolesjoin.system_roles_seq AS seq, trolesjoin.roles_name AS name
+        FROM        mhha.dbo.t_mhha_person_roles troles
+        LEFT JOIN (
+                    SELECT      tsystem.seq AS system_seq, tsystem.name AS system_name, tsystemroles.seq AS system_roles_seq, tsystemroles.name AS roles_name
+                    FROM        mhha.dbo.t_mhha_system_roles_list tsystemroles
+                    LEFT JOIN   mhha.dbo.t_mhha_system_list tsystem ON tsystemroles.system_seq = tsystem.seq
+        ) trolesjoin ON troles.system_roles_seq = trolesjoin.system_roles_seq
+        WHERE       troles.person_seq = ${person_seq}
+        ORDER BY    seq ASC
+    </select>
+    <select id="findPersonRolesCompFromRolesBySystemSeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.person.PersonRolesCompModel">
+        SELECT      troles.person_seq, trolesjoin.system_seq, trolesjoin.system_name, trolesjoin.system_roles_seq AS seq, trolesjoin.roles_name AS name
+        FROM        mhha.dbo.t_mhha_person_roles troles
+        LEFT JOIN (
+                    SELECT      tsystem.seq AS system_seq, tsystem.name AS system_name, tsystemroles.seq AS system_roles_seq, tsystemroles.name AS roles_name
+                    FROM        mhha.dbo.t_mhha_system_roles_list tsystemroles
+                    LEFT JOIN   mhha.dbo.t_mhha_system_list tsystem ON tsystemroles.system_seq = tsystem.seq
+        ) trolesjoin ON troles.system_roles_seq = trolesjoin.system_roles_seq
+        WHERE       troles.system_seq = ${system_seq}
+        ORDER BY    seq ASC
+    </select>
+    <select id="findPersonRolesCompFromRolesBySystemSeqAnd" parameterType="Int" resultType="hamyounghoon.back.model.mhha.person.PersonRolesCompModel">
+        SELECT      troles.person_seq, trolesjoin.system_seq, trolesjoin.system_name, trolesjoin.system_roles_seq AS seq, trolesjoin.roles_name AS name
+        FROM        mhha.dbo.t_mhha_person_roles troles
+        LEFT JOIN (
+                    SELECT      tsystem.seq AS system_seq, tsystem.name AS system_name, tsystemroles.seq AS system_roles_seq, tsystemroles.name AS roles_name
+                    FROM        mhha.dbo.t_mhha_system_roles_list tsystemroles
+                    LEFT JOIN   mhha.dbo.t_mhha_system_list tsystem ON tsystemroles.system_seq = tsystem.seq
+        ) trolesjoin ON troles.system_roles_seq = trolesjoin.system_roles_seq
+        WHERE       trolesjoin.system_seq = ${system_seq} AND troles.person_seq = ${person_seq}
+        ORDER BY    seq ASC
+    </select>
+
+    <insert id="addPersonDept" parameterType="hamyounghoon.back.model.mhha.roles.PersonDeptModel">
+        INSERT INTO     mhha.dbo.t_mhha_person_dept
+        VALUES          (${person_dept.system_dept_seq}, #{person_dept.person_seq})
+    </insert>
+    <insert id="addPersonDeptList" parameterType="java.util.List">
+        INSERT INTO     mhha.dbo.t_mhha_person_dept
+        VALUES
+        <foreach collection="person_dept" item="buff" index="index" open="(" separator=")," close=")">
+            ${buff.system_dept_seq},
+            #{buff.person_seq}
+        </foreach>
+    </insert>
+    <delete id="delPersonDeptBySystemSeqAndPersonSeq" parameterType="Int">
+        DELETE FROM     mhha.dbo.t_mhha_person_dept
+        WHERE           person_seq = ${person_seq} AND system_dept_seq IN (
+                        SELECT  seq
+                        FROM    mhha.dbo.t_mhha_system_dept_list
+                        WHERE   system_seq = ${system_seq}
+        )
+    </delete>
+    <delete id="delPersonDeptBySystemDeptSeqAndPersonSeq" parameterType="Int">
+        DELETE FROM     mhha.dbo.t_mhha_person_dept
+        WHERE           system_dept_seq = ${system_dept_seq} AND person_seq = ${person_seq}
+    </delete>
+    <insert id="addPersonRoles" parameterType="hamyounghoon.back.model.mhha.roles.PersonRolesModel">
+        INSERT INTO     mhha.dbo.t_mhha_person_roles
+        VALUES          (${person_roles.system_roles_seq}, #{person_roles.person_seq})
+    </insert>
+    <insert id="addPersonRolesList" parameterType="hamyounghoon.back.model.mhha.roles.PersonRolesModel">
+        INSERT INTO     mhha.dbo.t_mhha_person_roles
+        VALUES
+        <foreach collection="person_roles" item="buff" index="index" open="(" separator=")," close=")">
+            ${buff.system_roles_seq},
+            #{buff.person_seq}
+        </foreach>
+    </insert>
+    <delete id="delPersonRolesBySystemSeqAndPersonSeq" parameterType="Int">
+        DELETE FROM     mhha.dbo.t_mhha_person_roles
+        WHERE           person_seq = ${person_seq} AND system_roles_seq IN (
+                        SELECT  seq
+                        FROM    mhha.dbo.t_mhha_system_roles_list
+                        WHERE   system_seq = ${system_seq}
+        )
+    </delete>
+    <delete id="delPersonRolesBySystemRolesSeqAndPersonSeq" parameterType="Int">
+        DELETE FROM     mhha.dbo.t_mhha_person_roles
+        WHERE           system_roles_seq = ${system_roles_seq} AND person_seq = ${person_seq}
+    </delete>
+</mapper>

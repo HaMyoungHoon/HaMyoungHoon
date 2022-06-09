@@ -1,0 +1,57 @@
+CREATE TABLE [dbo].[t_mhha_system_list](	
+	[seq] [int] IDENTITY(1,1) NOT NULL,
+	[name] [nvarchar](50) NOT NULL,
+ CONSTRAINT [AK_t_mhha_system_list] UNIQUE(name), 	
+ CONSTRAINT [PK_t_mhha_system_list] PRIMARY KEY CLUSTERED 	
+(	
+	[seq] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]	
+) ON [PRIMARY]	
+	
+CREATE TABLE [dbo].[t_mhha_system_dept_list](	
+	[seq] [int] IDENTITY(1,1) NOT NULL,
+	[system_seq] [int] NOT NULL,
+	[name] [nvarchar](50) NOT NULL,
+ CONSTRAINT [AK_t_mhha_system_dept_list] UNIQUE(seq), 	
+ CONSTRAINT [PK_t_mhha_system_dept_list] PRIMARY KEY CLUSTERED 	
+(	
+	[system_seq] ASC, 
+	[name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]	
+) ON [PRIMARY]	
+	
+CREATE TABLE [dbo].[t_mhha_system_roles_list](	
+	[seq] [int] IDENTITY(1,1) NOT NULL,
+	[system_seq] [int] NOT NULL,
+	[name] [nvarchar](50) NOT NULL,
+ CONSTRAINT [AK_t_mhha_system_roles_list] UNIQUE(seq), 	
+ CONSTRAINT [PK_t_mhha_system_roles_list] PRIMARY KEY CLUSTERED 	
+(	
+	[system_seq] ASC, 
+	[name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]	
+) ON [PRIMARY]	
+
+CREATE TABLE [dbo].[t_mhha_person_dept](	
+	[seq] [int] IDENTITY(1,1) NOT NULL,
+	[system_dept_seq] [int] NOT NULL,
+	[person_seq] [int] NOT NULL,
+ CONSTRAINT [AK_t_mhha_person_dept] UNIQUE(seq), 	
+ CONSTRAINT [PK_t_mhha_person_dept] PRIMARY KEY CLUSTERED 	
+(	
+	[system_dept_seq] ASC, 
+	[person_seq] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]	
+) ON [PRIMARY]	
+	
+CREATE TABLE [dbo].[t_mhha_person_roles](	
+	[seq] [int] IDENTITY(1,1) NOT NULL,
+	[system_roles_seq] [int] NOT NULL,
+	[person_seq] [int] NOT NULL,
+ CONSTRAINT [AK_t_mhha_person_roles] UNIQUE(seq), 	
+ CONSTRAINT [PK_t_mhha_person_roles] PRIMARY KEY CLUSTERED 	
+(	
+	[system_roles_seq] ASC, 
+	[person_seq] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]	
+) ON [PRIMARY]	

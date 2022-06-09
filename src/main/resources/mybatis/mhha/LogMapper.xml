@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hamyounghoon.back.mapper.mhha.LogMapper">
+    <select id="countOfLog" resultType="Int">
+        SELECT      COUNT(seq)
+        FROM        mhha.dbo.t_mhha_log
+    </select>
+    <select id="findLog" resultType="hamyounghoon.back.model.mhha.LogModel">
+        SELECT      *
+        FROM (
+                    SELECT      ROW_NUMBER() OVER(ORDER BY seq DESC) AS rownum, *
+                    FROM        mhha.dbo.t_mhha_log
+        ) ret
+        ORDER BY    seq DESC
+    </select>
+    <select id="countOfLogByPerson" parameterType="Int" resultType="Int">
+        SELECT      COUNT(seq)
+        FROM        mhha.dbo.t_mhha_log
+        WHERE       person_seq = ${person_seq}
+    </select>
+    <select id="findLogByPerson" parameterType="Int" resultType="hamyounghoon.back.model.mhha.LogModel">
+        SELECT      *
+        FROM (
+                    SELECT      ROW_NUMBER() OVER(ORDER BY seq DESC) AS rownum, *
+                    FROM        mhha.dbo.t_mhha_log
+                    WHERE       person_seq = ${person_seq}
+        ) ret
+        ORDER BY    seq DESC
+    </select>
+    <select id="countOfLogByDate" parameterType="String" resultType="Int">
+        SELECT      COUNT(seq)
+        FROM        mhha.dbo.t_mhha_log
+        WHERE       log_date BETWEEN #{start_date} AND #{end_date}
+    </select>
+    <select id="findLogByDate" parameterType="String" resultType="hamyounghoon.back.model.mhha.LogModel">
+        SELECT      *
+        FROM (
+                    SELECT      ROW_NUMBER() OVER(ORDER BY seq DESC) AS rownum, *
+                    FROM        mhha.dbo.t_mhha_log
+                    WHERE       log_date BETWEEN #{start_date} AND #{end_date}
+        ) ret
+        ORDER BY    seq DESC
+    </select>
+
+    <select id="countOfLogComp" resultType="Int">
+        SELECT	    COUNT(a.seq)
+        FROM	    mhha.dbo.t_mhha_log a
+        LEFT JOIN   mhha.dbo.t_mhha_person b ON b.seq = a.person_seq
+    </select>
+    <select id="findLogComp" resultType="hamyounghoon.back.model.mhha.LogCompModel">
+        SELECT      *
+        FROM (
+                    SELECT	    ROW_NUMBER() OVER(ORDER BY seq DESC) AS rownum, a.seq, a.log_data, b.id, b.name, a.query
+                    FROM	    mhha.dbo.t_mhha_log a
+                    LEFT JOIN   mhha.dbo.t_mhha_person b ON b.seq = a.person_seq
+        ) ret
+        ORDER BY    seq DESC
+    </select>
+    <select id="countOfLogCompByPerson" parameterType="Int" resultType="Int">
+        SELECT	    COUNT(a.seq)
+        FROM	    mhha.dbo.t_mhha_log a
+        LEFT JOIN   mhha.dbo.t_mhha_person b ON b.seq = a.person_seq
+        WHERE       person_seq = ${person_seq}
+    </select>
+    <select id="findLogCompByPerson" parameterType="Int" resultType="hamyounghoon.back.model.mhha.LogCompModel">
+        SELECT      *
+        FROM (
+                    SELECT	    ROW_NUMBER() OVER(ORDER BY seq DESC) AS rownum, a.seq, a.log_data, b.id, b.name, a.query
+                    FROM	    mhha.dbo.t_mhha_log a
+                    LEFT JOIN   mhha.dbo.t_mhha_person b ON b.seq = a.person_seq
+                    WHERE       person_seq = ${person_seq}
+        ) ret
+        ORDER BY    seq DESC
+    </select>
+    <select id="countCompOfLogByDate" parameterType="String" resultType="Int">
+        SELECT	    COUNT(a.seq)
+        FROM	    mhha.dbo.t_mhha_log a
+        LEFT JOIN   mhha.dbo.t_mhha_person b ON b.seq = a.person_seq
+        WHERE       log_date BETWEEN #{start_date} AND #{end_date}
+    </select>
+    <select id="findLogCompByDate" parameterType="String" resultType="hamyounghoon.back.model.mhha.LogCompModel">
+        SELECT      *
+        FROM (
+                    SELECT	    ROW_NUMBER() OVER(ORDER BY seq DESC) AS rownum, a.seq, a.log_data, b.id, b.name, a.query
+                    FROM	    mhha.dbo.t_mhha_log a
+                    LEFT JOIN   mhha.dbo.t_mhha_person b ON b.seq = a.person_seq
+                    WHERE       log_date BETWEEN #{start_date} AND #{end_date}
+        ) ret
+        ORDER BY    seq DESC
+    </select>
+
+    <insert id="addLog" parameterType="String">
+        INSERT INTO     mhha.dbo.t_mhha_log
+        VALUES          (#{log_date}, ${person_seq}, #{query})
+    </insert>
+</mapper>

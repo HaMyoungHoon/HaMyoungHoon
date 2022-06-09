@@ -1,0 +1,10 @@
+CREATE TABLE [dbo].[t_mhha_log](	
+	[seq] [int] IDENTITY(1,1) NOT NULL,
+	[log_data] [nvarchar](50) NOT NULL,
+	[person_seq] [int] NOT NULL,
+	[query] [text] NOT NULL,
+ CONSTRAINT [PK_t_mhha_log] PRIMARY KEY CLUSTERED 	
+(	
+	[seq] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]	
+) ON [PRIMARY]	

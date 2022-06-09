@@ -1,0 +1,52 @@
+spring:
+  datasource:
+    mhha:
+      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+      jdbc-url: jdbc:sqlserver://127.0.0.1:1433
+      username: mhha
+      password: 1234
+
+  messages:
+    basename: i18n/exception
+    encoding: UTF-8
+
+  jwt:
+    secret: mhha
+
+  thymeleaf:
+    cache: false
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 200MB
+      max-request-size: 200MB
+
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+
+mybatis:
+  mapper-locations: classpath:/mybatis/**/*.xml
+
+server:
+  port: 51610
+  ssl:
+    enabled: true
+    key-alias: mhha.com
+    key-store: mhha.jks
+    key-store-password: 'mhhamhha'
+    key-password: 'mhhamhha'
+    trust-store: mhha.jks
+    trust-store-password: 'mhhamhha'
+
+  shutdown: immediate
+
+logging:
+  level:
+    web: trace
+    org:
+      springframework:
+        web: trace
+
+file:
+  default-dir: ./default

@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "lEKj/mrM55YlzkUHFLfVWHr4eZZwuP9rnt6WT1L9XPirxpS8jfcZn+dYxs55d6qM6WdcES47eBLkdrLAjZ8Cpw==",
+  "success": true,
+  "projectFilePath": "D:\\Projects\\VS2022\\Projects\\Certification\\Certification\\Certification.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mhha\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\6.0.4\\microsoft.netcore.app.runtime.win-x86.6.0.4.nupkg.sha512",
+    "C:\\Users\\mhha\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\6.0.4\\microsoft.windowsdesktop.app.runtime.win-x86.6.0.4.nupkg.sha512",
+    "C:\\Users\\mhha\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\6.0.4\\microsoft.aspnetcore.app.runtime.win-x86.6.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}

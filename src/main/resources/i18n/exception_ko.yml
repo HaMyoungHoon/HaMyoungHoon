@@ -1,0 +1,55 @@
+unKnown:
+  code: "-9999"
+  msg: "알 수 없는 오류가 발생했습니다."
+
+communication:
+  code: "-1000"
+  msg: "통신 오류가 발생했습니다."
+
+forbiddenWord:
+  code: "-1001"
+  msg: "입력한 내용에 금칙어({0})가 포함되어 있습니다."
+
+fileDownload:
+  code: "-2000"
+  msg: "파일 다운로드를 실패했습니다."
+
+fileUpload:
+  code: "-2001"
+  msg: "파일 업로드를 실패했습니다."
+
+notExistResource:
+  code: "-3000"
+  msg: "해당 리소스를 찾을 수 없습니다."
+
+notFoundDept:
+  code: "-3001"
+  msg: "해당 부서를 찾을 수 없습니다."
+
+notFoundLanguage:
+  code: "-3002"
+  msg: "해당 언어를 찾을 수 없습니다."
+
+notFoundRoles:
+  code: "-3003"
+  msg: "해당 권한을 찾을 수 없습니다."
+
+notFoundSystem:
+  code: "-3004"
+  msg: "해당 시스템을 찾을 수 없습니다."
+
+notFoundUser:
+  code: "-3005"
+  msg: "해당 유저를 찾을 수 없습니다."
+
+notOwner:
+  code: "-3006"
+  msg: "해당 권한으로 접근할 수 없습니다."
+
+signInFailed:
+  code: "-4000"
+  msg: "비밀번호가 맞지 않습니다."
+
+signUpFailed:
+  code: "-4001"
+  msg: "이미 등록된 계정입니다."

@@ -1,0 +1,55 @@
+unKnown:
+  code: "-9999"
+  msg: "An unknown error has occurred."
+
+communication:
+  code: "-1000"
+  msg: "A communication error has occurred."
+
+forbiddenWord:
+  code: "-1001"
+  msg: "Your input contains a nonsense word ({0})."
+
+fileDownload:
+  code: "-2000"
+  msg: "Failed to download file."
+
+fileUpload:
+  code: "-2001"
+  msg: "File upload failed."
+
+notExistResource:
+  code: "-3000"
+  msg: "The resource could not be found."
+
+notFoundDept:
+  code: "-3001"
+  msg: "The department could not be found."
+
+notFoundLanguage:
+  code: "-3002"
+  msg: "The language could not be found."
+
+notFoundRoles:
+  code: "-3003"
+  msg: "No such permission was found."
+
+notFoundSystem:
+  code: "-3004"
+  msg: "The system could not be found."
+
+notFoundUser:
+  code: "-3005"
+  msg: "The user could not be found."
+
+notOwner:
+  code: "-3006"
+  msg: "You cannot access with that permission."
+
+signInFailed:
+  code: "-4000"
+  msg: "Password does not match."
+
+signUpFailed:
+  code: "-4001"
+  msg: "Your account is already registered."
