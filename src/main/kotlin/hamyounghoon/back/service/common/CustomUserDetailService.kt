@@ -11,14 +11,12 @@ import java.util.*
 
 @Service
 class CustomUserDetailService: UserDetailsService {
-    @Autowired
-    lateinit var personMapper: PersonMapper
-    @Autowired
-    lateinit var rolesMapper: RolesMapper
+    @Autowired lateinit var personMapper: PersonMapper
+    @Autowired lateinit var rolesMapper: RolesMapper
 
     override fun loadUserByUsername(login_id: String): PersonModel =
         Optional.ofNullable(personMapper.findPersonByID(login_id)).orElseThrow { NotFoundUserException() }.apply {
-            roles.addAll(rolesMapper.findUserRolesCompFromRolesByPersonSeq(this.seq))
-            dept.addAll(rolesMapper.findUserRolesCompFromDeptByPersonSeq(this.seq))
+            roles.addAll(rolesMapper.findPersonRolesCompFromRolesByPersonSeq(this.seq))
+            dept.addAll(rolesMapper.findPersonRolesCompFromDeptByPersonSeq(this.seq))
         }
 }

@@ -12,6 +12,8 @@ data class PersonModel(
     @field:Schema(description = "t_mhha_person id") var id: String = "",
     @field:Schema(description = "t_mhha_person pw") var pw: String = "",
     @field:Schema(description = "t_mhha_person name") var name: String = "",
+    @field:Schema(description = "t_mhha_person entry_date") var entry_date: String = "",
+    @field:Schema(description = "t_mhha_person resign_date") var resign_date: String = "",
     @field:Schema(description = "t_mhha_person 계정 상태", example = "ONLINE : 정상, DELETE : 삭제 됨, STOP : 중지 됨") var status: String = "",
 ): UserDetails {
     @Schema(description = "t_mhha_system_roles join user roles data list")

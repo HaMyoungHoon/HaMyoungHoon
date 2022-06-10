@@ -4,6 +4,8 @@ CREATE TABLE [dbo].[t_mhha_person](
 	[pw] [nvarchar](50) NOT NULL,
 	[name] [nvarchar](50) NOT NULL,
 	[status] [nvarchar](50) NOT NULL,
+	[entry_date] [nvarchar](50) NOT NULL,
+	[resign_date] [nvarchar](50) NOT NULL,
  CONSTRAINT [AK_t_mhha_person] UNIQUE(id),
  CONSTRAINT [PK_t_mhha_person] PRIMARY KEY CLUSTERED 	
 (	

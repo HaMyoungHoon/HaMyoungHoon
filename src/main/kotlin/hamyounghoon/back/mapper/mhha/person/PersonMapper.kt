@@ -37,7 +37,7 @@ interface PersonMapper {
      * @param id 아이디
      * @return PersonModel
      */
-    fun findPersonByID(@Param(value = "id") id: String): PersonModel
+    fun findPersonByID(@Param(value = "id") id: String): PersonModel?
 
     /**
      * 유저 정보 by 유저 순번
@@ -52,4 +52,16 @@ interface PersonMapper {
      * @return List PersonModel
      */
     fun findPersonLikeName(@Param(value = "name") name: String): List<PersonModel>
+
+    /**
+     * 유저 정보 추가
+     * @param id 아이디
+     * @param pw 비번 Crypto
+     * @param name 이름
+     * @param entry_date 생성일
+     */
+    fun addPerson(@Param(value = "id") id: String, @Param(value = "pw") pw: String, @Param(value = "name") name: String, @Param(value = "entry_date") entry_date: String)
+    fun updatePersonByIDSetPW(@Param("id") id: String, @Param("pw") pw: String)
+    fun updatePersonByIDSetResignDate(@Param("id") id: String, @Param("resign_date") resign_date: String)
+    fun updatePersonByIDSetStatus(@Param("id") id: String, @Param("status") status: String)
 }

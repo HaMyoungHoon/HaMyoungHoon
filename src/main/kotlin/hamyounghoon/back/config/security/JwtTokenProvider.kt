@@ -17,11 +17,9 @@ import javax.servlet.http.HttpServletRequest
 
 @Component
 class JwtTokenProvider {
-    @Value(value = "\${spring.jwt.secret}")
-    var secretKey : String = ""
+    @Value(value = "\${spring.jwt.secret}") var secretKey : String = ""
     var tokenValidMilliseconds = 1000L * 60 * 60 * 8
-    @Autowired
-    lateinit var userDetailsService : UserDetailsService
+    @Autowired lateinit var userDetailsService : UserDetailsService
 
     companion object {
         const val authToken : String = "auth_token"

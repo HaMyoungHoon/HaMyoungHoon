@@ -7,6 +7,7 @@ data class SystemListModel(
     @field:Schema(description = "t_mhha_system_list 시스템 이름") var naem: String = "",
 ) {
     enum class SystemListEnum(val roles: String) {
+        NONE("NONE"),
         ADMIN("ADMIN"),
         HAMYOUNGHOON("HAMYOUNGHOON"),
         ETC("ETC")

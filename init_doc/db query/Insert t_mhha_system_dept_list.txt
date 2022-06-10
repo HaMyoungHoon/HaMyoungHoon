@@ -1,0 +1,6 @@
+INSERT INTO mhha.dbo.t_mhha_system_dept_list (system_seq, name) VALUES (1, N'NONE');
+INSERT INTO mhha.dbo.t_mhha_system_dept_list (system_seq, name) VALUES (2, N'SOFTWARE');
+INSERT INTO mhha.dbo.t_mhha_system_dept_list (system_seq, name) VALUES (2, N'FINANCE');
+INSERT INTO mhha.dbo.t_mhha_system_dept_list (system_seq, name) VALUES (2, N'SALES');
+INSERT INTO mhha.dbo.t_mhha_system_dept_list (system_seq, name) VALUES (2, N'PRODUCT');
+INSERT INTO mhha.dbo.t_mhha_system_dept_list (system_seq, name) VALUES (2, N'HR');

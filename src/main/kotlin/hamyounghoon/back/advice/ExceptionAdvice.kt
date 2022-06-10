@@ -13,9 +13,8 @@ import javax.servlet.http.HttpServletRequest
 
 @RestControllerAdvice
 class ExceptionAdvice {
-    @Autowired
-    lateinit var responseService: ResponseService
-    lateinit var messageSource: MessageSource
+    @Autowired lateinit var responseService: ResponseService
+    @Autowired lateinit var messageSource: MessageSource
 
     @ExceptionHandler(Exception::class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

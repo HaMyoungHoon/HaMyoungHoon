@@ -39,4 +39,23 @@
         WHERE       name like '%${name}%'
         ORDER BY    seq DESC
     </select>
+    <insert id="addPerson" parameterType="String">
+        INSERT INTO     mhha.dbo.t_mhha_person
+        VALUES          (#{id}, #{pw}, #{name}, #{entry_date}, '', 'ONLINE')
+    </insert>
+    <update id="updatePersonByIDSetPW" parameterType="String">
+        UPDATE      mhha.dbo.t_mhha_person
+        SET         pw = #{pw}
+        WHERE       id = #{id}
+    </update>
+    <update id="updatePersonByIDSetResignDate" parameterType="String">
+        UPDATE      mhha.dbo.t_mhha_person
+        SET         resign_date = #{resign_date}
+        WHERE       id = #{id}
+    </update>
+    <update id="updatePersonByIDSetStatus" parameterType="String">
+        UPDATE      mhha.dbo.t_mhha_person
+        SET         status = #{status}
+        WHERE       id = #{id}
+    </update>
 </mapper>

@@ -50,3 +50,4 @@ logging:
 
 file:
   default-dir: ./default
+  temp-dir: ./temp
