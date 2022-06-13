@@ -1,0 +1,98 @@
+CREATE TABLE [dbo].[t_mhha_application](
+	[seq] [int] IDENTITY(1,1) NOT NULL,
+	[name] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_t_mhha_application] PRIMARY KEY CLUSTERED 
+(
+	[seq] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+CREATE TABLE [dbo].[t_mhha_contract_date](
+	[seq] [int] IDENTITY(1,1) NOT NULL,
+	[forecast_seq] [int] NOT NULL,
+	[contract_month] [datetime] NOT NULL,
+ CONSTRAINT [PK_t_mhha_contract_date] PRIMARY KEY CLUSTERED 
+(
+	[seq] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+CREATE TABLE [dbo].[t_mhha_forecast](
+	[seq] [int] NOT NULL,
+	[insert_date] [datetime] NOT NULL,
+	[project_names_seq] [int] NOT NULL,
+	[principals_seq] [int] NOT NULL,
+	[model] [nvarchar](300) NOT NULL,
+	[application_seq] [int] NOT NULL,
+	[price] [bigint] NULL,
+	[price_etc] [nvarchar](100) NULL,
+	[possibility] [int] NOT NULL,
+	[quote_date] [datetime] NOT NULL,
+	[contract_month] [datetime] NOT NULL,
+	[situation] [nvarchar](200) NOT NULL,
+	[state_seq] [int] NOT NULL,
+	[person_seq] [int] NOT NULL,
+	[support_seq] [int] NULL
+) ON [PRIMARY]
+
+CREATE TABLE [dbo].[t_mhha_forecast_comp](
+	[seq] [int] NOT NULL,
+	[insert_date] [datetime] NOT NULL,
+	[project_name] [nvarchar](200) NULL,
+	[principals_name] [nvarchar](100) NULL,
+	[model] [nvarchar](300) NOT NULL,
+	[application_name] [nvarchar](100) NULL,
+	[price] [bigint] NULL,
+	[price_etc] [nvarchar](100) NULL,
+	[possibility] [int] NOT NULL,
+	[quote_date] [datetime] NOT NULL,
+	[contract_month] [datetime] NOT NULL,
+	[situation] [nvarchar](200) NOT NULL,
+	[state_name] [nvarchar](100) NULL,
+	[person_name] [nvarchar](100) NULL,
+	[support_name] [nvarchar](100) NULL
+) ON [PRIMARY]
+
+CREATE TABLE [dbo].[t_mhha_principals](
+	[seq] [int] IDENTITY(1,1) NOT NULL,
+	[name] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_t_mhha_principals] PRIMARY KEY CLUSTERED 
+(
+	[seq] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+CREATE TABLE [dbo].[t_mhha_project_names](
+	[seq] [int] IDENTITY(1,1) NOT NULL,
+	[name] [nvarchar](200) NOT NULL,
+	[customer] [nvarchar](100) NOT NULL,
+	[market_field] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_t_mhha_project_names] PRIMARY KEY CLUSTERED 
+(
+	[seq] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+CREATE TABLE [dbo].[t_mhha_schedule](
+	[seq] [int] IDENTITY(1,1) NOT NULL,
+	[title] [nvarchar](300) NULL,
+	[start_date] [datetime] NOT NULL,
+	[end_date] [datetime] NOT NULL,
+	[person_seq] [int] NOT NULL,
+	[is_del] [int] NOT NULL,
+ CONSTRAINT [PK_t_mhha_schedule] PRIMARY KEY CLUSTERED 
+(
+	[seq] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+CREATE TABLE [dbo].[t_mhha_state](
+	[seq] [int] IDENTITY(1,1) NOT NULL,
+	[name] [nvarchar](100) NOT NULL,
+	[back_color] [nvarchar](100) NOT NULL,
+	[text_color] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_t_mhha_state] PRIMARY KEY CLUSTERED 
+(
+	[seq] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]

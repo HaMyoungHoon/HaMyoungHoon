@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController
 class PageAccessibleController {
     @Autowired lateinit var responseService: ResponseService
     @Autowired lateinit var rolesService: RolesService
-    @Autowired lateinit var jwtTokenProvider: JwtTokenProvider
 
     @Operation(summary = "HaMyoungHoon.github.io schedule 접근 가능한지 확인")
     @GetMapping(value = ["/get/hamyounghoon/schedule"])

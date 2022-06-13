@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hamyounghoon.back.mapper.mhha.forecast.ScheduleMapper">
+    <select id="findScheduleByYear" parameterType="String" resultType="hamyounghoon.back.model.mhha.forecast.ScheduleModel">
+        SELECT      seq, title, start_date, end_date, person_seq, is_del
+        FROM        mhha.dbo.t_mhha_schedule
+        WHERE       is_del = 0 AND CONVERT(VARCHAR(4), start_date, 112) = #{year}
+        ORDER BY    seq desc
+    </select>
+    <select id="findScheduleByMonth" parameterType="String" resultType="hamyounghoon.back.model.mhha.forecast.ScheduleModel">
+        SELECT      seq AS id, title, start_date, end_date, person_seq, is_del
+        FROM        mhha.dbo.t_mhha_schedule
+        WHERE       is_del = 0 AND CONVERT(VARCHAR(7), start_date, 23) = #{month}
+        ORDER BY    seq desc
+    </select>
+    <select id="findScheduleByPerson" parameterType="Int" resultType="hamyounghoon.back.model.mhha.forecast.ScheduleModel">
+        SELECT      seq, title, start_date, end_date, person_seq, is_del
+        FROM        mhha.dbo.t_mhha_schedule
+        WHERE       is_del = 0 AND person_seq = ${person_seq}
+        ORDER BY    seq desc
+    </select>
+    <select id="modifyScheduleBySeq" parameterType="String">
+        UPDATE      mhha.dbo.t_mhha_schedule
+        SET         title = #{title}, start_date = #{start_date}, end_date = #{end_date}, person_seq = ${person_seq}, is_del = ${is_del}
+        WHERE       seq = ${seq}
+    </select>
+    <select id="addSchedule" parameterType="String">
+        INSERT INTO mhha.dbo.t_mhha_schedule
+        VALUES      (#{title}, #{start_date}, #{end_date}, ${person_seq}, 0)
+    </select>
+</mapper>

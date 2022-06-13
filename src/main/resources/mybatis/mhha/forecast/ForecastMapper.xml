@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hamyounghoon.back.mapper.mhha.forecast.ForecastMapper">
+    <!-- table forecast -->
+    <select id="findForecastYear" resultType="String">
+        SELECT      DISTINCT 2000 + seq / 10000 as seq
+        FROM        mhha.dbo.t_mhha_forecast
+    </select>
+    <select id="findForecastBySeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.forecast.ForecastModel">
+        SELECT      *
+        FROM        mhha.dbo.t_mhha_forecast
+        WHERE       seq = ${seq}
+    </select>
+    <select id="findForecastByDate" parameterType="String" resultType="hamyounghoon.back.model.mhha.forecast.ForecastModel">
+        SELECT      *
+        FROM        mhha.dbo.t_mhha_forecast
+        WHERE       quote_date BETWEEN #{start_date} AND #{end_date}
+        ORDER BY    seq DESC
+    </select>
+    <select id="findForecastJoinList" resultType="hamyounghoon.back.model.mhha.forecast.ForecastCompModel">
+        SELECT		tMain.seq, tMain.insert_date, tPrj.name AS project_name, tPP.name AS principals_name, model,
+                    tAPP.name AS application_name, price, price_etc, possibility, CONVERT(CHAR(10), quote_date, 20) AS quote_date,
+                    CONVERT(CHAR(10), contract_month, 20) AS contract_month, situation, tSts.name AS state_name, tPer.name AS person_name, tSupp.name AS support_name,
+                    tSts.back_color, tSts.text_color
+        FROM		mhha.dbo.t_mhha_forecast tMain
+        LEFT JOIN	mhha.dbo.t_mhha_project_names tPrj ON tMain.project_names_seq = tPrj.seq
+        LEFT JOIN	mhha.dbo.t_mhha_principals tPP ON tMain.principals_seq = tPP.seq
+        LEFT JOIN	mhha.dbo.t_mhha_application tApp ON tMain.application_seq = tApp.seq
+        LEFT JOIN	mhha.dbo.t_mhha_state tSts ON tMain.state_seq = tSts.seq
+        LEFT JOIN	mhha.dbo.t_mhha_person tPer ON tMain.person_seq = tPer.seq
+        LEFT JOIN	mhha.dbo.t_mhha_person tSupp ON tMain.support_seq = tSupp.seq
+        ORDER BY    tMain.seq DESC
+    </select>
+    <select id="findForecastYearJoinList" resultType="hamyounghoon.back.model.mhha.forecast.ForecastCompModel">
+        SELECT		tMain.seq, tMain.insert_date, tPrj.name AS project_name, tPP.name AS principals_name, model,
+                    tAPP.name AS application_name, price, price_etc, possibility, CONVERT(CHAR(10), quote_date, 20) AS quote_date,
+                    CONVERT(CHAR(10), contract_month, 20) AS contract_month, situation, tSts.name AS state_name, tPer.name AS person_name, tSupp.name AS support_name,
+                    tSts.back_color, tSts.text_color
+        FROM		mhha.dbo.t_mhha_forecast tMain
+        LEFT JOIN	mhha.dbo.t_mhha_project_names tPrj ON tMain.project_names_seq = tPrj.seq
+        LEFT JOIN	mhha.dbo.t_mhha_principals tPP ON tMain.principals_seq = tPP.seq
+        LEFT JOIN	mhha.dbo.t_mhha_application tApp ON tMain.application_seq = tApp.seq
+        LEFT JOIN	mhha.dbo.t_mhha_state tSts ON tMain.state_seq = tSts.seq
+        LEFT JOIN	mhha.dbo.t_mhha_person tPer ON tMain.person_seq = tPer.seq
+        LEFT JOIN	mhha.dbo.t_mhha_person tSupp ON tMain.support_seq = tSupp.seq
+        WHERE       2000 + tMain.seq / 10000 = ${year}
+        ORDER BY    tMain.seq DESC
+    </select>
+    <insert id="addForecast" parameterType="String">
+        INSERT INTO mhha.dbo.t_mhha_forecast
+        VALUES      ((SELECT CONVERT(INT, RIGHT(LEFT(CONVERT(DATE, GETDATE()), 4), 2)) * 10000 + (SELECT COUNT(seq) FROM mhha.dbo.t_forecast WHERE CONVERT(CHAR(4), insert_date, 112) = CONVERT(CHAR(4), GETDATE(), 112)) + 1),
+                     (SELECT GETDATE()), ${project_names_seq}, ${principals_seq}, #{model}, ${application_seq},
+                     #{price, jdbcType=BIGINT}, #{price_etc}, ${possibility}, #{quote_date}, #{contract_month},
+                     #{situation}, ${state_seq}, ${person_seq}, ${support_seq})
+    </insert>
+    <update id="setForecastBySeqExceptContractMonth" parameterType="String">
+        UPDATE      mhha.dbo.t_mhha_forecast
+        SET         project_names_seq = ${project_names_seq}, principals_seq = ${principals_seq}, model = #{model}, application_seq = ${application_seq},
+                    price = #{price, jdbcType=BIGINT}, price_etc = #{price_etc}, possibility = ${possibility}, situation = #{situation},
+                    state_seq = ${state_seq}, person_seq = ${person_seq}, support_seq = ${support_seq}
+        WHERE       seq = ${seq}
+    </update>
+    <update id="setForecastBySeqSetContractMonth" parameterType="String">
+        UPDATE      mhha.dbo.t_mhha_forecast
+        SET         contract_month = #{contract_month}
+        WHERE       seq = ${seq}
+    </update>
+    <update id="setForecastBySeqSetSituation" parameterType="String">
+        UPDATE      mhha.dbo.t_mhha_forecast
+        SET         situation = #{situation}
+        WHERE       seq = ${seq}
+    </update>
+    <update id="setForecastBySeqSetState" parameterType="Int">
+        UPDATE      mhha.dbo.t_mhha_forecast
+        SET         state_seq = ${state_seq}
+        WHERE       seq = ${seq}
+    </update>
+    <!-- table contract_date -->
+    <select id="findContractDateBySeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.forecast.ContractDateModel">
+        SELECT      *
+        FROM        mhha.dbo.t_mhha_contract_date
+        WHERE       seq = ${seq}
+    </select>
+    <select id="findContractDateByForecastSeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.forecast.ContractDateModel">
+        SELECT      *
+        FROM        mhha.dbo.t_mhha_contract_date
+        WHERE       forecast_seq = ${queue_no}
+        ORDER BY    seq DESC
+    </select>
+    <select id="findContractDateByDate" parameterType="String" resultType="hamyounghoon.back.model.mhha.forecast.ContractDateModel">
+        SELECT      *
+        FROM        mhha.dbo.t_mhha_contract_date
+        WHERE       contract_month BETWEEN #{start_date} AND #{end_date}
+        ORDER BY    forecast_seq DESC
+    </select>
+
+    <!-- model forecast comp -->
+    <select id="findForecastCompBySeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.forecast.ForecastCompModel">
+        SELECT      *
+        FROM        mhha.dbo.t_mhha_forecast_comp
+        WHERE       seq = ${seq}
+    </select>
+    <select id="findForecastCompByDate" parameterType="String" resultType="hamyounghoon.back.model.mhha.forecast.ForecastCompModel">
+        SELECT      *
+        FROM        mhha.dbo.t_mhha_forecast_comp
+        WHERE       quote_date BETWEEN #{start_date} AND #{end_date}
+        ORDER BY    seq DESC
+    </select>
+    <select id="findForecastCompList" parameterType="String" resultType="hamyounghoon.back.model.mhha.forecast.ForecastCompModel">
+        SELECT      *
+        FROM        (
+                    SELECT      ROW_NUMBER() OVER(ORDER BY seq DESC) AS rownum, *
+                    FROM        mhha.dbo.t_mhha_forecast_comp
+        ) ret
+        ORDER BY    seq DESC
+    </select>
+
+    <select id="findForecastForStatePieChart" parameterType="String" resultType="hamyounghoon.back.model.mhha.forecast.StatePieChartModel">
+        SELECT      tSts.name, tSts.back_color, SUM(price) as price
+        FROM        mhha.dbo.t_mhha_forecast tMain
+        LEFT JOIN   mhha.dbo.t_mhha_state tSts on tMain.state_seq = tSts.seq
+        WHERE       2000 + tMain.seq / 10000 = ${year}
+        GROUP BY    tSts.name, tSts.back_color
+    </select>
+
+    <select id="findForecastForStateBarChartByQuote" parameterType="String" resultType="hamyounghoon.back.model.mhha.forecast.StateBarChartSubModel">
+        SELECT		CONVERT(CHAR(6), t_mhha_forecast.quote_date, 112) AS date, SUM(t_mhha_forecast.price) AS price, t_mhha_forecast.state_seq
+        FROM        mhha.dbo.t_mhha_forecast
+        WHERE       2000 + t_mhha_forecast.seq / 10000 = ${year}
+        GROUP BY	CONVERT(CHAR(6), t_mhha_forecast.quote_date, 112), t_mhha_forecast.state_seq
+        ORDER BY	CONVERT(CHAR(6), t_mhha_forecast.quote_date, 112) ASC
+    </select>
+    <select id="findForecastForStateBarChartByContract" parameterType="String" resultType="hamyounghoon.back.model.mhha.forecast.StateBarChartSubModel">
+        SELECT		CONVERT(CHAR(6), t_mhha_forecast.contract_month, 112) AS date, SUM(t_mhha_forecast.price) AS price, t_mhha_forecast.state_seq
+        FROM        mhha.dbo.t_mhha_forecast
+        WHERE       2000 + t_mhha_forecast.seq / 10000 = ${year}
+        GROUP BY	CONVERT(CHAR(6), t_mhha_forecast.contract_month, 112), t_mhha_forecast.state_seq
+        ORDER BY	CONVERT(CHAR(6), t_mhha_forecast.contract_month, 112) ASC
+    </select>
+
+</mapper>

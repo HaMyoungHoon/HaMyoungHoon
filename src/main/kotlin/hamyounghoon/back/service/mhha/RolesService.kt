@@ -7,6 +7,7 @@ import hamyounghoon.back.mapper.mhha.person.RolesMapper
 import hamyounghoon.back.model.mhha.person.*
 import hamyounghoon.back.model.mhha.roles.*
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.web.AuthenticationEntryPoint
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -478,6 +479,17 @@ class RolesService {
         } else {
             false
         }
+    }
+    fun isValid(token: String, notValidThrow: Boolean = true): Boolean {
+        if (!jwtTokenProvider.validateToken(token)) {
+            return if (notValidThrow) {
+                throw NotOwnerException()
+            } else {
+                false
+            }
+        }
+
+        return true
     }
     fun getPerson(token: String): PersonModel {
         return jwtTokenProvider.getPersonData(token)

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hamyounghoon.back.mapper.mhha.forecast.FormatTableMapper">
+    <!--region application table-->
+    <select id="findApplication" resultType="hamyounghoon.back.model.mhha.forecast.ApplicationModel">
+        SELECT      *
+        FROM        mhha.dbo.t_mhha_application
+        ORDER BY    seq DESC
+    </select>
+    <select id="findApplicationBySeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.forecast.ApplicationModel">
+        SELECT      *
+        FROM        mhha.dbo.t_mhha_application
+        WHERE       seq = ${seq}
+        ORDER BY    seq DESC
+    </select>
+    <insert id="addApplication" parameterType="String">
+        INSERT INTO mhha.dbo.t_mhha_application
+        VALUES      (#{name})
+    </insert>
+    <update id="setApplicationBySeqSetName" parameterType="String">
+        UPDATE      mhha.dbo.t_mhha_application
+        SET         name = #{name}
+        WHERE       seq = ${seq}
+    </update>
+    <!--endregion-->
+
+    <!--region principals table-->
+    <select id="findPrincipals" resultType="hamyounghoon.back.model.mhha.forecast.PrincipalsModel">
+        SELECT      *
+        FROM        mhha.dbo.t_mhha_principals
+        ORDER BY    seq DESC
+    </select>
+    <select id="findPrincipalsBySeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.forecast.PrincipalsModel">
+        SELECT      *
+        FROM        mhha.dbo.t_mhha_principals
+        WHERE       seq = ${seq}
+    </select>
+    <insert id="addPrincipals" parameterType="String">
+        INSERT INTO mhha.dbo.t_mhha_principals
+        VALUES      (#{name})
+    </insert>
+    <update id="setPrincipalsBySeqSetName" parameterType="String">
+        UPDATE      mhha.dbo.t_mhha_principals
+        SET         name = #{name}
+        WHERE       seq = ${seq}
+    </update>
+    <!--endregion-->
+
+    <!--region state table-->
+    <select id="findState" resultType="hamyounghoon.back.model.mhha.forecast.StateModel">
+        SELECT      *
+        FROM        mhha.dbo.t_mhha_state
+        ORDER BY    seq DESC
+    </select>
+    <select id="findStateBySeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.forecast.StateModel">
+        SELECT      *
+        FROM        mhha.dbo.t_mhha_state
+        WHERE       seq = ${seq}
+    </select>
+    <insert id="addState" parameterType="String">
+        INSERT INTO mhha.dbo.t_mhha_state
+        VALUES      (#{name}, #{back_color}, #{text_color})
+    </insert>
+    <update id="setStateBySeqSetName" parameterType="String">
+        UPDATE      mhha.dbo.t_mhha_state
+        SET         name = #{name}, back_color = #{back_color}, text_color = #{text_color}
+        WHERE       seq = ${seq}
+    </update>
+    <!--endregion -->
+</mapper>

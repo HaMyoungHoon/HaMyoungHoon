@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hamyounghoon.back.mapper.mhha.forecast.ProjectNamesMapper">
+    <select id="findProjectNamesBySeq" parameterType="Int" resultType="hamyounghoon.back.model.mhha.forecast.ProjectNamesModel">
+        SELECT      *
+        FROM        mhha.dbo.t_mhha_project_names
+        WHERE       seq = ${seq}
+    </select>
+    <select id="getProjectNamesList" resultType="hamyounghoon.back.model.mhha.forecast.ProjectNamesModel">
+        SELECT      *
+        FROM        mhha.dbo.t_mhha_project_names
+        ORDER BY    seq DESC
+    </select>
+    <insert id="addProjectNames" parameterType="String">
+        INSERT INTO mhha.dbo.t_mhha_project_names
+        VALUES      (#{name}, #{customer}, #{market_field})
+    </insert>
+</mapper>
